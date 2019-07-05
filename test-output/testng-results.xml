@@ -2,16 +2,16 @@
 <testng-results total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2019-07-05T10:54:31Z" name="Default suite" finished-at="2019-07-05T10:54:52Z" duration-ms="21159">
+  <suite started-at="2019-07-05T11:09:25Z" name="Default suite" finished-at="2019-07-05T11:09:38Z" duration-ms="12170">
     <groups>
     </groups>
-    <test started-at="2019-07-05T10:54:31Z" name="Default test" finished-at="2019-07-05T10:54:52Z" duration-ms="21159">
-      <class name="FlightBookingTest">
-        <test-method signature="testThatResultsAppearForAOneWayJourney()[pri:0, instance:FlightBookingTest@36060e]" started-at="2019-07-05T16:24:31Z" name="testThatResultsAppearForAOneWayJourney" finished-at="2019-07-05T16:24:52Z" duration-ms="21132" status="PASS">
+    <test started-at="2019-07-05T11:09:25Z" name="Default test" finished-at="2019-07-05T11:09:38Z" duration-ms="12170">
+      <class name="SignInTest">
+        <test-method signature="shouldThrowAnErrorIfSignInDetailsAreMissing()[pri:0, instance:SignInTest@432038ec]" started-at="2019-07-05T16:39:25Z" name="shouldThrowAnErrorIfSignInDetailsAreMissing" finished-at="2019-07-05T16:39:37Z" duration-ms="12149" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testThatResultsAppearForAOneWayJourney -->
-      </class> <!-- FlightBookingTest -->
+        </test-method> <!-- shouldThrowAnErrorIfSignInDetailsAreMissing -->
+      </class> <!-- SignInTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

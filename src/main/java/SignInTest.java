@@ -6,8 +6,12 @@ import org.testng.annotations.Test;
 
 public class SignInTest extends CommonActions  {
 
-	
     WebDriver driver = new ChromeDriver(options());
+    
+    By yourTripsBtn = By.linkText("Your trips");
+    By signIn = By.id("SignIn");
+    By signInButton = By.id("signInButton");
+    By errorMsg = By.id("errors1");
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
@@ -15,16 +19,25 @@ public class SignInTest extends CommonActions  {
         setDriverPath();
 
         driver.get("https://www.cleartrip.com/");
+        
+        waitFor(500);
+        
+        Click(yourTripsBtn);
+        Click(signIn);
+
         waitFor(2000);
-
-        driver.findElement(By.linkText("Your trips")).click();
-        driver.findElement(By.id("SignIn")).click();
-
-        driver.findElement(By.id("signInButton")).click();
-
-        String errors1 = driver.findElement(By.id("errors1")).getText();
-        Assert.assertTrue(errors1.contains("There were errors in your submission"));
+        driver.switchTo().frame("modal_window");
+        
+        Click(signInButton);
+        
+        String error = driver.findElement(errorMsg).getText();
+        Assert.assertTrue(error.contains("There were errors in your submission"), "Error message not thrown when submitting empty credentials");
+        
         driver.quit();
+    }
+    
+    private void Click(By by){
+    	driver.findElement(by).click();
     }
 
 }
