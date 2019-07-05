@@ -9,16 +9,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
   
-  public class FlightBookingTest extends CommonActions {
+  public class FlightBookingTest {
   
   WebDriver driver = new ChromeDriver(options());
   
-  By originCity = By.xpath(".//ul[@id='ui-id-1']/li"); By destinationCity =
-  By.xpath(".//ul[@id='ui-id-2']/li"); By fromTextBox = By.id("FromTag"); By
-  toTextBox = By.id("ToTag"); By dateCalender =
-  By.xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a"); By
-  SearchBtn = By.id("SearchBtn"); By searchSummary =
-  By.className("searchSummary");
+  By originCity = By.xpath(".//ul[@id='ui-id-1']/li");
+  By destinationCity = By.xpath(".//ul[@id='ui-id-2']/li");
+  By fromTextBox = By.id("FromTag");
+  By toTextBox = By.id("ToTag");
+  By dateCalender = By.xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a");
+  By SearchBtn = By.id("SearchBtn");
+  By searchSummary = By.className("searchSummary");
   
   @Test public void testThatResultsAppearForAOneWayJourney() {
   
@@ -68,10 +69,20 @@ import org.testng.annotations.Test;
   private void ClearAndSendKeys(By by, String data){
   driver.findElement(by).clear(); driver.findElement(by).sendKeys(data); }
   
-  private void Click(By by){ driver.findElement(by).click(); }
-  
-  private void CloseAlert() { try { driver.switchTo().alert().accept(); }
-  catch(Exception e) { //ignore exception } }
-  
+  private void Click(By by)
+  {
+	  driver.findElement(by).click();
   }
+  
+  private void CloseAlert()
+  {
+	  try { driver.switchTo().alert().accept();
+  }
+  catch(Exception e)
+	  {
+	  	//ignore exception
+	  }
+	  
+  }
+  
  

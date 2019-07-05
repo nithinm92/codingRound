@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,5 +53,15 @@ public class CommonActions {
     public void Click(By by){
         wait.until(ExpectedConditions.elementToBeClickable(by));
     	driver.findElement(by).click();
+    }
+    
+    public void Click(WebElement element){
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+    }
+    
+    public void SendData(WebElement element, String data){
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.sendKeys(data);
     }
 }

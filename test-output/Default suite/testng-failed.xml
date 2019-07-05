@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="SignInTest">
+      <class name="HotelBookingTest">
         <methods>
-          <include name="shouldThrowAnErrorIfSignInDetailsAreMissing"/>
+          <include name="Close"/>
+          <include name="shouldBeAbleToSearchForHotels"/>
           <include name="Start"/>
         </methods>
-      </class> <!-- SignInTest -->
+      </class> <!-- HotelBookingTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
