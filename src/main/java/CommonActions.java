@@ -1,5 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class CommonActions {
 
@@ -11,11 +10,19 @@ public class CommonActions {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
         }
         if (systemType.contains("windows")) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\NithinM\\Documents\\GitHub\\codingRound\\chromedriver.exe");
         }
         if (systemType.contains("linux")) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
         }
+    }
+    
+    protected ChromeOptions options()
+    {
+    	ChromeOptions options = new ChromeOptions();
+		options.setBinary("C:\\Users\\NithinM\\Documents\\google\\GoogleChromePortable\\App\\Chrome-bin\\chrome.exe");
+		
+		return options;
     }
     
     protected void waitFor(int durationInMilliSeconds) {
@@ -26,14 +33,4 @@ public class CommonActions {
         }
     }
 	
-    
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
 }

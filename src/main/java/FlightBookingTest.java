@@ -24,8 +24,8 @@ public class FlightBookingTest extends CommonActions {
         driver.findElement(By.id("FromTag")).sendKeys("Bangalore");
 
         //wait for the auto complete options to appear for the origin
-
         waitFor(2000);
+        
         List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         originOptions.get(0).click();
 

@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 
 public class SignInTest extends CommonActions  {
 
-    WebDriver driver = new ChromeDriver();
+	
+    WebDriver driver = new ChromeDriver(options());
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {

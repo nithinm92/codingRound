@@ -27,6 +27,8 @@ public class HotelBookingTest extends CommonActions {
         setDriverPath();
 
         driver.get("https://www.cleartrip.com/");
+        waitFor(2000);
+        
         hotelLink.click();
 
         localityTextBox.sendKeys("Indiranagar, Bangalore");
