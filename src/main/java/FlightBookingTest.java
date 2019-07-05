@@ -1,58 +1,71 @@
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class FlightBookingTest extends CommonActions {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver = new ChromeDriver(options());
 
+    By originCity = By.xpath(".//ul[@id='ui-id-1']/li");
+    By destinationCity = By.xpath(".//ul[@id='ui-id-2']/li");
+    By fromTextBox = By.id("FromTag");
+    By toTextBox = By.id("ToTag");
+    By dateCalender = By.xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a");
+    By SearchBtn =  By.id("SearchBtn");
+    By searchSummary = By.className("searchSummary");    
+    
     @Test
     public void testThatResultsAppearForAOneWayJourney() {
 
         setDriverPath();
+        
         driver.get("https://www.cleartrip.com/");
-        waitFor(2000);
-        driver.findElement(By.id("OneWay")).click();
-
-        driver.findElement(By.id("FromTag")).clear();
-        driver.findElement(By.id("FromTag")).sendKeys("Bangalore");
-
-        //wait for the auto complete options to appear for the origin
+        
         waitFor(2000);
         
-        List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
+        Click(By.id("OneWay"));
+        
+        CloseAlert();
+        
+        // Search and select origin city 
+        ClearAndSendKeys(fromTextBox, "Bangalore");
+        
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.elementToBeClickable(originCity));
+                     
+        List<WebElement> originOptions = driver.findElements(originCity);
         originOptions.get(0).click();
-
-        driver.findElement(By.id("toTag")).clear();
-        driver.findElement(By.id("toTag")).sendKeys("Delhi");
-
-        //wait for the auto complete options to appear for the destination
-
-        waitFor(2000);
+        
+        // Search and select destination city 
+        ClearAndSendKeys(toTextBox, "Delhi");
+        
+        wait.until(ExpectedConditions.elementToBeClickable(destinationCity));
+        
         //select the first item from the destination auto complete list
-        List<WebElement> destinationOptions = driver.findElement(By.id("ui-id-2")).findElements(By.tagName("li"));
+        List<WebElement> destinationOptions = driver.findElements(destinationCity);
         destinationOptions.get(0).click();
-
-        driver.findElement(By.xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a")).click();
-
+        
+        Click(dateCalender);
+        
         //all fields filled in. Now click on search
-        driver.findElement(By.id("SearchBtn")).click();
-
-        waitFor(5000);
+        Click(SearchBtn);
+        
+        waitFor(6000);
+        
         //verify that result appears for the provided journey search
-        Assert.assertTrue(isElementPresent(By.className("searchSummary")));
+        Assert.assertTrue(isElementPresent(searchSummary), "Search summary not present");
 
         //close the browser
         driver.quit();
 
     }
-
 
     private boolean isElementPresent(By by) {
         try {
@@ -62,6 +75,25 @@ public class FlightBookingTest extends CommonActions {
             return false;
         }
     }
+    
+    private void ClearAndSendKeys(By by, String data){
+    	driver.findElement(by).clear();
+    	driver.findElement(by).sendKeys(data);
+    }
+    
+    private void Click(By by){
+    	driver.findElement(by).click();
+    }
 
-
+    private void CloseAlert()
+    {
+        try 
+        {
+        	driver.switchTo().alert().accept();
+        }
+        catch(Exception e) {
+        	//ignore exception
+        }
+    }
+    
 }

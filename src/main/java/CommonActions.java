@@ -21,6 +21,7 @@ public class CommonActions {
     {
     	ChromeOptions options = new ChromeOptions();
 		options.setBinary("C:\\Users\\NithinM\\Documents\\google\\GoogleChromePortable\\App\\Chrome-bin\\chrome.exe");
+		options.addArguments("--disable-notifications");
 		
 		return options;
     }
@@ -29,8 +30,7 @@ public class CommonActions {
         try {
             Thread.sleep(durationInMilliSeconds);
         } catch (InterruptedException ex) {
-            ex.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            ex.printStackTrace();
         }
-    }
-	
+    }    
 }

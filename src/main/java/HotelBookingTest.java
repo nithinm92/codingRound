@@ -2,12 +2,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 public class HotelBookingTest extends CommonActions {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver = new ChromeDriver(options());
 
     @FindBy(linkText = "Hotels")
     private WebElement hotelLink;
@@ -23,6 +24,8 @@ public class HotelBookingTest extends CommonActions {
 
     @Test
     public void shouldBeAbleToSearchForHotels() {
+    	
+    	PageFactory.initElements(driver, this);
     	
         setDriverPath();
 
