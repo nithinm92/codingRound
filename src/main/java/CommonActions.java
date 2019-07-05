@@ -6,6 +6,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonActions {
 
+	private WebDriver driver;
+    private WebDriverWait wait;
+	
+	public CommonActions(WebDriver driver)
+	{
+		this.driver = driver;
+		wait = new WebDriverWait(this.driver, 20);
+	}
+	
+	public CommonActions()
+	{
+		// empty constructor
+	}
+	
     protected void setDriverPath() {
     	
     	String systemType = System.getProperty("os.name").toLowerCase();
