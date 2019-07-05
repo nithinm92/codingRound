@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -50,18 +51,50 @@ public class CommonActions {
 		return options;
     }
     
-    public void Click(By by){
+    protected void Click(By by){
         wait.until(ExpectedConditions.elementToBeClickable(by));
     	driver.findElement(by).click();
     }
     
-    public void Click(WebElement element){
+    protected void Click(WebElement element){
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
     
-    public void SendData(WebElement element, String data){
+    protected void SendData(WebElement element, String data){
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.sendKeys(data);
+    }
+    
+    protected void ClearAndSendData(By by, String data)
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(by));
+    	driver.findElement(by).clear();
+        driver.findElement(by).sendKeys(data);
+    }
+    
+    protected void CloseAlert()
+    {
+  	  try 
+  	  { 
+  		  driver.switchTo().alert().accept();
+  	  }
+  	  catch(Exception e)
+  	  {
+  	  	//ignore exception
+  	  }
+    }
+    
+    protected boolean IsElementPresent(By by)
+    {
+    	try
+    	{
+    		driver.findElement(by);
+    		return true;
+    	}
+    	catch (NoSuchElementException e)
+    	{
+    		return false;
+    	}
     }
 }
