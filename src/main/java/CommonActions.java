@@ -1,4 +1,8 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonActions {
 
@@ -17,6 +21,11 @@ public class CommonActions {
         }
     }
     
+    protected void getWebSite(String url)
+    {
+    	driver.get(url);
+    }
+    
     protected ChromeOptions options()
     {
     	ChromeOptions options = new ChromeOptions();
@@ -26,11 +35,8 @@ public class CommonActions {
 		return options;
     }
     
-    protected void waitFor(int durationInMilliSeconds) {
-        try {
-            Thread.sleep(durationInMilliSeconds);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }    
+    public void Click(By by){
+        wait.until(ExpectedConditions.elementToBeClickable(by));
+    	driver.findElement(by).click();
+    }
 }

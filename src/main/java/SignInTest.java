@@ -1,43 +1,51 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 
-public class SignInTest extends CommonActions  {
+public class SignInTest  {
 
-    WebDriver driver = new ChromeDriver(options());
+	private WebDriver driver;
+    private CommonActions common;
+    private SignInPage signIn;
     
-    By yourTripsBtn = By.linkText("Your trips");
-    By signIn = By.id("SignIn");
-    By signInButton = By.id("signInButton");
-    By errorMsg = By.id("errors1");
-
+    @BeforeMethod
+    public void Start()
+    {
+    	// set chromedriver path
+    	common = new CommonActions();    	
+    	common.setDriverPath();
+    	
+    	// inititalize chrome
+    	driver = new ChromeDriver(common.options());
+    	common = new CommonActions(driver);
+    	
+    	// inititalize SignInPage class object
+    	signIn = new SignInPage(driver);
+       	signIn.Openwebsite();
+    }
+    
+    
+	@AfterMethod
+	public void Close() 
+	{ 
+		// close chrome browser instance
+		driver.quit();
+	}
+	
+    
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
-
-        setDriverPath();
-
-        driver.get("https://www.cleartrip.com/");
+       
+    	signIn.NavigateToSignInPage();
+    	
+        signIn.SwitchToSignInPageFrame();
         
-        waitFor(500);
+        signIn.SubmitSignInCredentials();
         
-        Click(yourTripsBtn);
-        Click(signIn);
-
-        waitFor(2000);
-        driver.switchTo().frame("modal_window");
-        
-        Click(signInButton);
-        
-        String error = driver.findElement(errorMsg).getText();
+        String error = signIn.GetsignInErrorMessage();
         Assert.assertTrue(error.contains("There were errors in your submission"), "Error message not thrown when submitting empty credentials");
-        
-        driver.quit();
     }
-    
-    private void Click(By by){
-    	driver.findElement(by).click();
-    }
-
 }

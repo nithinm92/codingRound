@@ -6,6 +6,7 @@
       <class name="SignInTest">
         <methods>
           <include name="shouldThrowAnErrorIfSignInDetailsAreMissing"/>
+          <include name="Start"/>
         </methods>
       </class> <!-- SignInTest -->
     </classes>
